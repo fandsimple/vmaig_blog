@@ -86,8 +86,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vmaig_blog/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3443">
-              <caret line="214" column="8" selection-start-line="214" selection-start-column="8" selection-end-line="214" selection-end-column="8" />
+            <state relative-caret-position="2040">
+              <caret line="85" column="16" lean-forward="true" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -168,7 +168,6 @@
         <option value="$PROJECT_DIR$/blog_env/lib/python3.6/site-packages/xadmin/sites.py" />
         <option value="$PROJECT_DIR$/vmaig_blog/urls.py" />
         <option value="$PROJECT_DIR$/blog/models.py" />
-        <option value="$PROJECT_DIR$/vmaig_blog/settings.py" />
         <option value="$PROJECT_DIR$/blog/admin.py" />
         <option value="$PROJECT_DIR$/blog/templates/blog/article.html" />
         <option value="$PROJECT_DIR$/blog/templates/blog/include/nav.html" />
@@ -176,6 +175,7 @@
         <option value="$PROJECT_DIR$/blog_env/lib/python3.6/site-packages/django/views/generic/detail.py" />
         <option value="$PROJECT_DIR$/blog/templates/blog/news.html" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/vmaig_blog/settings.py" />
       </list>
     </option>
   </component>
@@ -688,8 +688,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vmaig_blog/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3443">
-          <caret line="214" column="8" selection-start-line="214" selection-start-column="8" selection-end-line="214" selection-end-column="8" />
+        <state relative-caret-position="2040">
+          <caret line="85" column="16" lean-forward="true" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
         </state>
       </provider>
     </entry>
