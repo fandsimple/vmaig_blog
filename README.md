@@ -30,15 +30,9 @@ http://fanfanhome.cn
 ![新闻](http://vmaig.qiniudn.com/screenshot/vmaig_news.jpg)
 
 # 安装运行
-安装virtualenv :
+安装python3.6.7 :
 
-    sudo pip install virtualenv
-
-创建并激活虚拟环境 :
-
-    virtualenv www
-    cd www
-    source bin/acitve
+    教程略，网上一大堆
 
 下载代码,切换目录：
     
