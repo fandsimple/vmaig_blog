@@ -250,3 +250,6 @@ MDEDITOR_CONFIGS = {
     'lineNumbers': False  # 行号
     }
 }
+
+# 静态资源收集配置
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
