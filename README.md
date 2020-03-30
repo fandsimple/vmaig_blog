@@ -20,14 +20,9 @@ vmaig\_blog 是一个基于  **Django1.8**  跟  **Bootstrap3**  开发的 **博
 8. 拥有一个以**时间轴**显示的非常酷炫的“新闻”板块，你可以每天在后台添加新闻。
 9. 支持**手机浏览**，对手机浏览进行了调整。
 
-# Demo
+# 可访问如下链接进行预览
 http://fanfanhome.cn  
 
-# 预览
-![首页](http://vmaig.qiniudn.com/screenshot/vmaig_01.jpg)
-![头像](http://vmaig.qiniudn.com/screenshot/vmaig_02.jpg)
-![评论](http://vmaig.qiniudn.com/screenshot/vmaig_03.jpg)
-![新闻](http://vmaig.qiniudn.com/screenshot/vmaig_news.jpg)
 
 # 安装运行
 安装python3.6.7 :
@@ -91,3 +86,7 @@ EMAIL\_HOST\_PASSWORD(你的邮箱密码)，
 **特别注意**
 首页的便签云中的内容，在后台不能修改。
 请修改  blog/templates/blog/widgets/tags_cloud.html 中的 tags数组的内容。
+
+
+![gongzonghao](https://github.com/fandsimple/src/blob/master/img/wx.jpeg)
+![gongzonghao](https://github.com/fandsimple/src/blob/master/img/gongzonghao.jpeg)
