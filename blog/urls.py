@@ -1,4 +1,6 @@
 from django.conf.urls import url
+
+from blog import views
 from blog.views import IndexView,ArticleView,AllView,SearchView,ColumnView,UserView,NewsView,TagView,CategoryView
 from django.views.generic import TemplateView,DetailView
 from blog.models import News
@@ -18,4 +20,5 @@ urlpatterns = [
         url(r'^news/(?P<pk>\w+)$',DetailView.as_view(model=News)),
         url(r'^tag/(?P<tag>\w+)/$',TagView.as_view()),
         url(r'^category/(?P<category>\w+)/$',CategoryView.as_view()),
+        url(r'^test/', views.test, name='test'),
 ]

@@ -3,6 +3,9 @@ from django.db import models
 from django.conf import settings
 
 #用来修改admin中显示的app名称,因为admin app 名称是用 str.title()显示的,所以修改str类的title方法就可以实现.
+from mdeditor.fields import MDTextField
+
+
 class string_with_title(str):
     def __new__(cls, value, title):
         instance = str.__new__(cls, value)
@@ -30,7 +33,7 @@ NEWS = {
         3: u'cnBeta',
 }
 
-
+# 导航条内容
 class Nav(models.Model):
     name = models.CharField(max_length=40,verbose_name=u'导航条内容')
     url = models.CharField(max_length=200,blank=True,null=True,verbose_name=u'指向地址')
@@ -48,7 +51,7 @@ class Nav(models.Model):
 
 
 
-
+# 类别管理
 class Category(models.Model):
     name = models.CharField(max_length=40,verbose_name=u'名称')
     parent = models.ForeignKey('self',default=None,blank=True,null=True,verbose_name=u'上级分类')
@@ -63,13 +66,14 @@ class Category(models.Model):
         app_label = string_with_title('blog',u"博客管理")
 
     
-    def __unicode__(self):
+    def __str__(self):
         if self.parent:
             return '%s-->%s' % (self.parent,self.name)
         else:
             return '%s' % (self.name)
 
 
+# 文章
 class Article(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL,verbose_name=u'作者')
     category = models.ForeignKey(Category,verbose_name=u'分类')
@@ -77,9 +81,11 @@ class Article(models.Model):
     en_title = models.CharField(max_length=100,verbose_name=u'英文标题')
     img = models.CharField(max_length=200,default='/static/img/article/default.jpg')
     tags = models.CharField(max_length=200,null=True,blank=True,verbose_name=u'标签',help_text=u'用逗号分隔')
-    summary = models.TextField(verbose_name=u'摘要')
-    content = models.TextField(verbose_name=u'正文')
-    
+    # summary = models.TextField(verbose_name=u'摘要')
+    summary = MDTextField(verbose_name=u'摘要')
+    content = MDTextField(verbose_name=u'正文')
+    # content = models.TextField(verbose_name=u'正文')
+
     view_times = models.IntegerField(default=0)
     zan_times = models.IntegerField(default=0)
 
@@ -100,10 +106,11 @@ class Article(models.Model):
         ordering = ['rank','-is_top','-pub_time','-create_time']
         app_label = string_with_title('blog',u"博客管理")
     
-    def __unicode__(self):
+    def __str__(self):
             return self.title
 
 
+# 专栏
 class Column(models.Model):
     name = models.CharField(max_length=40,verbose_name=u'专栏内容')
     summary = models.TextField(verbose_name=u'专栏摘要')
@@ -116,10 +123,11 @@ class Column(models.Model):
         ordering = ['-create_time']
         app_label = string_with_title('blog',u"博客管理")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+# 轮播图
 class Carousel(models.Model):
     title = models.CharField(max_length=100,verbose_name=u'标题')
     summary = models.TextField(blank=True,null=True,verbose_name=u'摘要')
@@ -132,6 +140,7 @@ class Carousel(models.Model):
         app_label = string_with_title('blog',u"博客管理")
 
 
+# 新闻
 class News(models.Model):
     title = models.CharField(max_length=100,verbose_name=u'标题')
     summary = models.TextField(verbose_name=u'摘要')

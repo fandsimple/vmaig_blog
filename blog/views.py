@@ -19,6 +19,7 @@ from vmaig_blog.settings import PAGE_NUM
 import datetime,time
 import json
 import logging
+import markdown
 
 #缓存
 try:
@@ -28,6 +29,12 @@ except ImportError as e:
 
 #logger
 logger = logging.getLogger(__name__)
+
+def changeMarkdownToHtml(artical_list):
+    for artical in artical_list:
+        artical.content = markdown.markdown(artical.content)
+        artical.summary = markdown.markdown(artical.summary)
+
 
 
 class BaseMixin(object):
@@ -60,6 +67,7 @@ class IndexView(BaseMixin,ListView):
 
     def get_queryset(self):
         article_list = Article.objects.filter(status=0)
+        changeMarkdownToHtml(article_list)
         return article_list
     
 
@@ -96,7 +104,14 @@ class ArticleView(BaseMixin,DetailView):
             #更新缓存
             cache.set(en_title,visited_ips,15*60)
 
-        return super(ArticleView,self).get(request,*args,**kwargs)
+        self.object = self.get_object()
+        context = self.get_context_data(object=self.object)
+
+        # 将文章内容转化为markdown
+        context['article'].content = markdown.markdown(context['article'].content)
+        return self.render_to_response(context)
+
+        # return super(ArticleView,self).get(request,*args,**kwargs)
 
 
     def get_context_data(self,**kwargs):
@@ -117,6 +132,7 @@ class AllView(BaseMixin,ListView):
 
     def get_queryset(self):
         article_list = Article.objects.filter(status=0)[0:PAGE_NUM]
+        changeMarkdownToHtml(article_list)
         return article_list
 
     def post(self, request, *args, **kwargs):
@@ -147,6 +163,7 @@ class AllView(BaseMixin,ListView):
         isend = len(article_list) != (end-start+1)
 
         article_list = article_list[0:end-start]
+        changeMarkdownToHtml(article_list)
 
         html = ""
         for article in article_list:
@@ -172,6 +189,7 @@ class SearchView(BaseMixin,ListView):
         article_list = Article.objects.only('title','summary','tags')\
                 .filter(Q(title__icontains=s)|Q(summary__icontains=s)|Q(tags__icontains=s)\
                 ,status=0);
+        changeMarkdownToHtml(article_list)
         return article_list
 
 
@@ -183,7 +201,7 @@ class TagView(BaseMixin,ListView):
     def get_queryset(self):
         tag = self.kwargs.get('tag','')
         article_list = Article.objects.only('tags').filter(tags__icontains=tag,status=0);
-
+        changeMarkdownToHtml(article_list)
         return article_list
 
 
@@ -199,7 +217,7 @@ class CategoryView(BaseMixin,ListView):
         except Category.DoesNotExist:
             logger.error(u'[CategoryView]此分类不存在:[%s]' % category)
             raise Http404
-
+        changeMarkdownToHtml(article_list)
         return article_list
 
 
@@ -255,7 +273,7 @@ class ColumnView(BaseMixin,ListView):
         except Column.DoesNotExist:
             logger.error(u'[ColumnView]访问专栏不存在: [%s]' % column)
             raise Http404
-
+        changeMarkdownToHtml(article_list)
         return article_list
 
 
@@ -287,3 +305,8 @@ class NewsView(BaseMixin,TemplateView):
         kwargs['active'] = start_day/7  #li中那个显示active
 
         return super(NewsView,self).get_context_data(**kwargs)
+
+
+def test(request):
+
+    return render(request, 'admin/base.html')

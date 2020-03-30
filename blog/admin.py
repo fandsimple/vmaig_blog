@@ -1,7 +1,10 @@
 #coding:utf-8
 from django.contrib import admin
 from blog.models import Article,Category,Carousel,Nav,Column,News
+import markdown
 
+admin.site.site_header = '樊樊家园后花园'
+admin.site.site_title = '樊樊家园后台管理系统'
 
 class CategoryAdmin(admin.ModelAdmin):
     search_fields = ('name',)
@@ -19,16 +22,32 @@ class ArticleAdmin(admin.ModelAdmin):
         (u'基本信息', {
             'fields': ('title','en_title','img','category','tags','author','is_top','rank','status')
             }),
-        (u'内容', {
-            'fields': ('content',) 
+        (u'文章内容', {
+            # 'fields': ('content',)
+            'fields': ('content',)
             }),
-        (u'摘要', {
+        (u'文章摘要', {
             'fields': ('summary',) 
             }),
         (u'时间', {
             'fields': ('pub_time',) 
             }),
     )
+
+    # def save_model(self, request, obj, form, change):
+    #     # 将markdown文本保存成为html文本
+    #     obj.content = markdown.markdown(obj.content)
+    #     obj.summary = markdown.markdown(obj.summary)
+    #     obj.save()
+
+    # def change_view(self, request, object_id, form_url='', extra_context=None):
+    #     import pdb
+    #     pdb.set_trace()
+
+
+    # def content_to_markdown(self):
+    #     return 1111
+
 
 
 class NewsAdmin(admin.ModelAdmin):

@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 """
 Django settings for mysite project.
 
@@ -16,7 +16,6 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
@@ -26,12 +25,12 @@ SECRET_KEY = 'p1p2e^77+6ex*1@-s6hzcx7l3bx#g2q0w1za1c-x-1p@n6z^x*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = (
+    'mdeditor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 'mdeditor',
     'blog',
     'vmaig_auth',
     'vmaig_comments',
@@ -60,7 +60,7 @@ ROOT_URLCONF = 'vmaig_blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates/"),],
+        'DIRS': [os.path.join(BASE_DIR, "templates/"), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vmaig_blog.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -85,7 +84,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -100,81 +98,78 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
 
-#设置user model
+# 设置user model
 AUTH_USER_MODEL = "vmaig_auth.VmaigUser"
 
-
-#log配置###########################################
+# log配置###########################################
 LOG_FILE = "./all.log"
 
 LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': True,
+    'version': 1,
+    'disable_existing_loggers': True,
 
-        'filters': {
-            'require_debug_false': {
-                '()': 'django.utils.log.RequireDebugFalse'
-                }
-            },
-        'formatters': {
-            'simple': {
-                'format': '[%(levelname)s] %(module)s : %(message)s'
-                },
-            'verbose': {
-                'format': '[%(asctime)s] [%(levelname)s] %(module)s : %(message)s'
-                }
-            },
-
-        'handlers': {
-            'null': {
-                'level': 'DEBUG',
-                'class': 'django.utils.log.NullHandler',
-                },
-            'console': {
-                'level': 'INFO',
-                'class': 'logging.StreamHandler',
-                'formatter': 'verbose'
-                },
-            'file': {
-                'level': 'INFO',
-                'class': 'logging.FileHandler',
-                'formatter': 'verbose',
-                'filename': LOG_FILE,
-                'mode': 'a',
-                },
-            'mail_admins': {
-                'level': 'ERROR',
-                'class': 'django.utils.log.AdminEmailHandler',
-                'filters': ['require_debug_false']
-                }
-            },
-        'loggers': {
-            '': {
-                'handlers': ['file', 'console'],
-                'level': 'INFO',
-                'propagate': True,
-                },
-            'django': {
-                'handlers': ['file', 'console'],
-                'level': 'DEBUG',
-                'propagate': True,
-                },
-            'django.request': {
-                'handlers': ['mail_admins', 'console'],
-                'level': 'ERROR',
-                'propagate': True,
-                },
-            }
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
         }
+    },
+    'formatters': {
+        'simple': {
+            'format': '[%(levelname)s] %(module)s : %(message)s'
+        },
+        'verbose': {
+            'format': '[%(asctime)s] [%(levelname)s] %(module)s : %(message)s'
+        }
+    },
 
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'django.utils.log.NullHandler',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'formatter': 'verbose',
+            'filename': LOG_FILE,
+            'mode': 'a',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false']
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins', 'console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
 
-#cache配置#########################################
+# cache配置#########################################
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
@@ -185,7 +180,7 @@ CACHES = {
     },
     'memcache': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        #'LOCATION': 'unix:/home/billvsme/memcached.sock',
+        # 'LOCATION': 'unix:/home/billvsme/memcached.sock',
         'LOCATION': '127.0.0.1:11211',
         'options': {
             'MAX_ENTRIES': 1024,
@@ -193,23 +188,56 @@ CACHES = {
     },
 }
 
-
-#分页配置#######################################
+# 分页配置#######################################
 PAGE_NUM = 5
 
-#email配置#########################################
+# email配置#########################################
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = ''                       #SMTP地址 例如: smtp.163.com
-EMAIL_PORT = 25                       #SMTP端口 例如: 25
-EMAIL_HOST_USER = ''                  #我自己的邮箱 例如: xxxxxx@163.com
-EMAIL_HOST_PASSWORD = ''              #我的邮箱密码 例如  xxxxxxxxx
-EMAIL_SUBJECT_PREFIX = u'vmaig'       #为邮件Subject-line前缀,默认是'[django]'
-EMAIL_USE_TLS = True                  #与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
+EMAIL_HOST = 'smtp.163.com'  # SMTP地址 例如: smtp.163.com
+EMAIL_PORT = 25  # SMTP端口 例如: 25
+EMAIL_HOST_USER = 'fand1024@163.com'  # 我自己的邮箱 例如: xxxxxx@163.com
+EMAIL_HOST_PASSWORD = '123456aa'  # 我的邮箱密码 例如  xxxxxxxxx
+EMAIL_SUBJECT_PREFIX = u'vmaig'  # 为邮件Subject-line前缀,默认是'[django]'
+EMAIL_USE_TLS = True  # 与SMTP服务器通信时，是否启动TLS链接(安全链接)。默认是false
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-#七牛配置#######################################
+# 七牛配置#######################################
 qiniu_access_key = ''
 qiniu_secret_key = ''
 qiniu_bucket_name = ''
 
+# Markdown插件配置
+# 配置图片保存位置
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/media/'
+
+# 基本功能配置
+MDEDITOR_CONFIGS = {
+'default':{
+    'width': '100%',  # 自定义编辑框宽度
+    'heigth': 500,   # 自定义编辑框高度
+    'toolbar': ["undo", "redo", "|",
+                "bold", "del", "italic", "quote", "ucwords", "uppercase", "lowercase", "|",
+                "h1", "h2", "h3", "h5", "h6", "|",
+                "list-ul", "list-ol", "hr", "|",
+                "link", "reference-link", "image", "code", "preformatted-text", "code-block", "table", "datetime",
+                "emoji", "html-entities", "pagebreak", "goto-line", "|",
+                "help", "info",
+                "||", "preview", "watch", "fullscreen"],  # 自定义编辑框工具栏
+    'upload_image_formats': ["jpg", "jpeg", "gif", "png", "bmp", "webp"],  # 图片上传格式类型
+    'image_folder': 'editor',  # 图片保存文件夹名称
+    'theme': 'default',  # 编辑框主题 ，dark / default
+    'preview_theme': 'default',  # 预览区域主题， dark / default
+    'editor_theme': 'default',  # edit区域主题，pastel-on-dark / default
+    'toolbar_autofixed': True,  # 工具栏是否吸顶
+    'search_replace': True,  # 是否开启查找替换
+    'emoji': True,  # 是否开启表情功能
+    'tex': True,  # 是否开启 tex 图表功能
+    'flow_chart': True,  # 是否开启流程图功能
+    'sequence': True,  # 是否开启序列图功能
+    'watch': True,  # 实时预览
+    'lineWrapping': False,  # 自动换行
+    'lineNumbers': False  # 行号
+    }
+}
