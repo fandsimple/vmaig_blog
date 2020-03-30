@@ -1,0 +1,8 @@
+Django==1.8
+django-crispy-forms==1.9.0
+django-mdeditor==0.1.17
+django-simpleui==3.3
+django-xadmin==0.5.0
+Markdown==3.2.1
+Pillow==7.0.0
+pytz==2019.3

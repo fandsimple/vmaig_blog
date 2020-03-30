@@ -2,3 +2,5 @@
 *.pyo
 *.log
 *.sqlite3
+blog_env
+upload

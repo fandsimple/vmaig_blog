@@ -1,19 +1,17 @@
-vmaig.com 网站源码
 =================
 #有问题欢迎加qq群
-vmaig qq群: 458788510  
-我的qq: 994171686  
+樊樊家园技术交流qq群: 981094716  
+我的qq: 2094531487  
 
 
 #更新日志
-2015/5/15 从django1.6 升级到 django1.8 (还保留django1.6分支)  
-2015/6/21 添加[xadmin分支](https://github.com/billvsme/vmaig_blog/tree/xadmin),xadmin分支中使用xadmin作为后台管理(使用 django 1.8),如果你想后台比较漂亮可以切换到xadmin分支(注意你不需要pip install django-xadmin 但是需要安装django-crispy-forms跟django-reversion详细步骤见xadmin分支中的README)  
-2015/7/5 对xadmin分支中的错误进行了比较大的修改  
+2020-3-30博客基本功能完成，后台支持markdown文档的编辑和发布
+ 
 
 #概述
-vmaig\_blog 是一个基于  **Django1.8**  跟  **Bootstrap3**  开发的 **博客系统** ，实现了一个博客完整的功能。http://vmaig.com 就是基于vmaig\_blog 搭建的。
+vmaig\_blog 是一个基于  **Django1.8**  跟  **Bootstrap3**  开发的 **博客系统** ，实现了一个博客完整的功能。http://fanfanhome.cn 就是基于vmaig\_blog 搭建的。
 #功能
-1. 文章,分类,专栏的添加，删除，修改。支持**tinymce**富文本编辑器。支持文章中代码**高亮**。
+1. 文章,分类,专栏的添加，删除，修改。支持**mrakdonwn**文本编辑器。支持文章中代码**高亮**。
 2. 实现**用户注册,登陆,修改密码,忘记重置密码**。通过**邮箱**通知注册用户, 用户忘记密码基于邮件（需要在setting.py设置好邮箱)。
 3. 实现**用户头像**，用户可以上传头像，然后编辑头像大小，然后保存，头像可以存在本地，也可自动保存在**七牛**云中（需要在setting.py 中设置好七牛的相关配置）。
 4. **支持评论**，实现了一个独立的评论系统。
@@ -24,7 +22,7 @@ vmaig\_blog 是一个基于  **Django1.8**  跟  **Bootstrap3**  开发的 **博
 9. 支持**手机浏览**，对手机浏览进行了调整。
 
 #Demo
-http://vmaig.com   
+http://fanfanhome.cn  
 
 #预览
 ![首页](http://vmaig.qiniudn.com/screenshot/vmaig_01.jpg)
@@ -43,27 +41,13 @@ http://vmaig.com
     cd www
     source bin/acitve
 
-安装Django1.8 :
-
-    pip install Django==1.8
-
-安装Pillow （因为处理头像要用到PIL库）:
-
-    pip install Pillow
-
-
-如果想使用七牛云替代本地存储头像，安装qiniu :
-
-    pip install qiniu
-
-如果使用sqlite，安装pytz :
-    
-    pip install pytz
-
 下载代码,切换目录：
     
     git clone https://github.com/billvsme/vmaig_blog
     cd vmaig_bolg
+    
+##### 安装所需要的的依赖包
+    pip install -r requirments.txt
 
 配置setting.py :
 
@@ -95,10 +79,9 @@ EMAIL\_HOST\_PASSWORD(你的邮箱密码)，
 
     python manage.py makemigrations
     python manage.py migrate
-    python manage.py createsuperuser
+    python manage.py createsuperuser (创建管理员)
     
-运行 :
-    
+运行 : 
     python manage.py runserver
     
 #接下来该干什么？
