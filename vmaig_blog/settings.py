@@ -90,7 +90,10 @@ DATABASES = {
         'PASSWORD': '102487',
         'HOST': 'localhost',
         'PORT': 3306,
-        'CONN_MAX_AGE': 9
+        'CONN_MAX_AGE': 9,
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+        }
     }
 }
 
