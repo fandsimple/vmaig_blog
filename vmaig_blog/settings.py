@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'vmaig_blog',
         'USER': 'root',
-        'PASSWORD': '102487aa',
+        'PASSWORD': '102487',
         'HOST': 'localhost',
         'PORT': 3306,
         'CONN_MAX_AGE': 9
@@ -105,7 +105,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
