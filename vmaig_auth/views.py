@@ -91,7 +91,8 @@ class UserControl(View):
             current_site = get_current_site(request)
             site_name = current_site.name
             domain = current_site.domain
-            title = u"欢迎来到 %s ！" % site_name
+            # title = u"欢迎来到 %s ！" % site_name
+            title = u"欢迎来到 樊樊家园 ！"
             message = u"你好！ %s ,感谢注册 %s ！\n\n" % (username,site_name) + \
                       u"请牢记以下信息：\n" + \
                       u"用户名：%s" % username+"\n" + \
@@ -101,6 +102,7 @@ class UserControl(View):
             try:
                 send_mail(title, message, from_email, [email])
             except Exception as e:
+                logger.error(e)
                 logger.error(u'[UserControl]用户注册邮件发送失败:[%s]/[%s]' % (username,email))
                 return HttpResponse(u"发送邮件错误!\n注册失败",status=500)
 
