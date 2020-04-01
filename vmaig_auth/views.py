@@ -220,7 +220,7 @@ class UserControl(View):
 
         imgData = base64.b64decode(data)
     
-        filename ="tx_100x100_"+'%d' % request.user.id+".jpg"
+        filename ="tx_100x100_"+'%d' % request.user.id+".png"
         filedir = "vmaig_auth/static/tx/"
         if not os.path.exists(filedir):
             os.makedirs(filedir)
