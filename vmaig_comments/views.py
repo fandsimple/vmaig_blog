@@ -48,7 +48,7 @@ class CommentControl(View):
         try:
             img = comment.user.img
         except Exception as e:
-            img = "http://vmaig.qiniudn.com/image/tx/tx-default.jpg"
+            img = "/media/editor/自己_20200403155507612734.png"
 
         #返回当前评论
         html = "<li>\
