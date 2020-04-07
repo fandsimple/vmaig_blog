@@ -20,6 +20,7 @@ import datetime,time
 import json
 import logging
 import markdown
+from markdown.extensions.wikilinks import WikiLinkExtension
 
 #缓存
 try:
@@ -30,10 +31,32 @@ except ImportError as e:
 #logger
 logger = logging.getLogger(__name__)
 
+def toHtml(text):
+    return markdown.markdown(text, output_format='html5',
+                      extensions=['markdown.extensions.toc',
+                                  WikiLinkExtension(
+                                      base_url='https://en.wikipedia.org/wiki/',
+                                      end_url='#Hyperlinks_in_wikis'),
+                                  'markdown.extensions.sane_lists',
+                                  'markdown.extensions.codehilite',
+                                  'markdown.extensions.abbr',
+                                  'markdown.extensions.attr_list',
+                                  'markdown.extensions.def_list',
+                                  'markdown.extensions.fenced_code',
+                                  'markdown.extensions.footnotes',
+                                  'markdown.extensions.smart_strong',
+                                  'markdown.extensions.meta',
+                                  'markdown.extensions.nl2br',
+                                  'markdown.extensions.tables'])
+
 def changeMarkdownToHtml(artical_list):
     for artical in artical_list:
-        artical.content = markdown.markdown(artical.content)
-        artical.summary = markdown.markdown(artical.summary)
+        # artical.content = markdown.markdown(artical.content)
+        # artical.summary = markdown.markdown(artical.summary)
+        artical.content = toHtml(artical.content)
+        artical.summary = toHtml(artical.summary)
+
+
 
 
 
@@ -289,17 +312,15 @@ class NewsView(BaseMixin,TemplateView):
         start_day = int(start_day)
         end_day = int(end_day)
 
-        start_date = datetime.datetime.now();
+        start_date = datetime.datetime.now()
 
         #获取url中时间断的资讯
         for x in range(start_day,end_day+1):
             date = start_date - datetime.timedelta(x)
-            news_list = News.objects.filter(pub_time__year=date.year,
-                                        pub_time__month=date.month,
-                                        pub_time__day = date.day)
-                   
+            news_list = News.objects.filter(pub_time__year=date.year, pub_time__month=date.month, pub_time__day = date.day)
             if news_list:
                 timeblocks.append(news_list)
+
         
         kwargs['timeblocks'] = timeblocks
         kwargs['active'] = start_day/7  #li中那个显示active
