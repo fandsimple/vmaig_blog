@@ -44,7 +44,7 @@ def toHtml(text):
                                   'markdown.extensions.def_list',
                                   'markdown.extensions.fenced_code',
                                   'markdown.extensions.footnotes',
-                                  'markdown.extensions.smart_strong',
+                                  # 'markdown.extensions.smart_strong',
                                   'markdown.extensions.meta',
                                   'markdown.extensions.nl2br',
                                   'markdown.extensions.tables'])
