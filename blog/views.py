@@ -1,4 +1,5 @@
 #coding:utf-8
+import mistune
 from django import template
 from django import forms
 from django.http import HttpResponse,Http404
@@ -32,22 +33,24 @@ except ImportError as e:
 logger = logging.getLogger(__name__)
 
 def toHtml(text):
-    return markdown.markdown(text, output_format='html5',
-                      extensions=['markdown.extensions.toc',
-                                  WikiLinkExtension(
-                                      base_url='https://en.wikipedia.org/wiki/',
-                                      end_url='#Hyperlinks_in_wikis'),
-                                  'markdown.extensions.sane_lists',
-                                  'markdown.extensions.codehilite',
-                                  'markdown.extensions.abbr',
-                                  'markdown.extensions.attr_list',
-                                  'markdown.extensions.def_list',
-                                  'markdown.extensions.fenced_code',
-                                  'markdown.extensions.footnotes',
-                                  # 'markdown.extensions.smart_strong',
-                                  'markdown.extensions.meta',
-                                  'markdown.extensions.nl2br',
-                                  'markdown.extensions.tables'])
+    # return markdown.markdown(text, output_format='html5',
+    #                   extensions=['markdown.extensions.toc',
+    #                               WikiLinkExtension(
+    #                                   base_url='https://en.wikipedia.org/wiki/',
+    #                                   end_url='#Hyperlinks_in_wikis'),
+    #                               'markdown.extensions.sane_lists',
+    #                               'markdown.extensions.codehilite',
+    #                               'markdown.extensions.abbr',
+    #                               'markdown.extensions.attr_list',
+    #                               'markdown.extensions.def_list',
+    #                               'markdown.extensions.fenced_code',
+    #                               'markdown.extensions.footnotes',
+    #                               # 'markdown.extensions.smart_strong',
+    #                               'markdown.extensions.meta',
+    #                               'markdown.extensions.nl2br',
+    #                               'markdown.extensions.tables']
+    #                          )
+    return markdown.markdown(text, output_format='html5', extensions=['extra'])
 
 def changeMarkdownToHtml(artical_list):
     for artical in artical_list:
@@ -55,8 +58,6 @@ def changeMarkdownToHtml(artical_list):
         # artical.summary = markdown.markdown(artical.summary)
         artical.content = toHtml(artical.content)
         artical.summary = toHtml(artical.summary)
-
-
 
 
 
@@ -131,7 +132,7 @@ class ArticleView(BaseMixin,DetailView):
         context = self.get_context_data(object=self.object)
 
         # 将文章内容转化为markdown
-        context['article'].content = markdown.markdown(context['article'].content)
+        context['article'].content = toHtml(context['article'].content)
         return self.render_to_response(context)
 
         # return super(ArticleView,self).get(request,*args,**kwargs)
